@@ -5,17 +5,19 @@ import java.util.Random;
 public class Terrain {
     private List<Point> mines;
     private Point[][] cases;
+    private Plateau plateau;
 
 
-    public Terrain() {
+    public Terrain(Plateau plateauJeu) {
         mines = new ArrayList<>();
-        cases = new Point[9][9];
+        cases = new Point[plateauJeu.column][plateauJeu.line];
+        plateau = plateauJeu;
     }
 
     public void genererTerrain() {
-        for(int y = 0; y < cases.length; y++) {
-            for(int x = 0; x < cases.length; x++) {
-                cases[y][x] = new Point(x,y);
+        for (int y = 0; y < cases.length; y++) {
+            for (int x = 0; x < cases.length; x++) {
+                cases[y][x] = new Point(x, y);
             }
         }
     }
@@ -25,14 +27,14 @@ public class Terrain {
         int nbMinesActuelles = 0;
         while (true) {
             //générer des coordonnées pour les mines
-            int x = random.nextInt(9);
-            int y = random.nextInt(9);
+            int x = random.nextInt(plateau.line);
+            int y = random.nextInt(plateau.column);
             //vérifie si les coordonnées sont déjà celles d'une mine
             if (cases[y][x] instanceof Mine) {
                 continue;
             }
             //place une mine aux coordonnées générées
-            Mine mine = new Mine(x,y);
+            Mine mine = new Mine(x, y);
             cases[y][x] = mine;
             mines.add(mine);
             //augmente le nombre de mines
@@ -43,16 +45,16 @@ public class Terrain {
             }
         }
 
-        for(int y = 0; y < cases.length; y++) {
-            for(int x = 0; x < cases.length; x++) {
-                if (!(cases[y][x] instanceof Mine)) {
+        for (Point[] aCase : cases) {
+            for (int x = 0; x < cases.length; x++) {
+                if (!(aCase[x] instanceof Mine)) {
                     int nbMines = 0;
-                    for(Point m : mines) {
-                        if (cases[y][x].estVoisineDe(m)) {
+                    for (Point m : mines) {
+                        if (aCase[x].estVoisineDe(m)) {
                             nbMines++;
                         }
                     }
-                    cases[y][x].setNbMinesAutour(nbMines);
+                    aCase[x].setNbMinesAutour(nbMines);
                 }
             }
         }
@@ -72,21 +74,24 @@ public class Terrain {
         } else {
             return 0;
         }
-        
+
     }
 
     public void afficherTerrain() {
         System.out.println();
-        System.out.println( " │123456789│");
-        System.out.println( "-│---------│");
+        System.out.print("X");
+        for (int i = 0; i < plateau.line; i++) {
+            System.out.print("│" + (i + 1));
+        }
+        System.out.print("│");
+        System.out.println();
         for (int y = 0; y < cases.length; y++) {
-            System.out.print(y+1 + "|");
+            System.out.print(y + 1 + "│");
             for (int x = 0; x < cases.length; x++) {
-                System.out.print(cases[y][x]);
+                System.out.print(cases[y][x] + "│");
             }
-            System.out.print("|");
+
             System.out.println();
         }
-        System.out.println( "-│---------│");
     }
 }

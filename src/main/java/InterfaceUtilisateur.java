@@ -4,12 +4,91 @@ public class InterfaceUtilisateur {
     
     private Scanner scanner;
     private Terrain terrain;
-    private int casesLibresRestantes = 9 * 9;
+    private Plateau plateau;
+    private int casesLibresRestantes;
 
-    public InterfaceUtilisateur() {
+    public InterfaceUtilisateur(Plateau plateau) {
         this.scanner = new Scanner(System.in);
-        this.terrain = new Terrain();
+        this.terrain = new Terrain(plateau);
+        this.plateau = plateau;
+        this.casesLibresRestantes= plateau.line * plateau.column;
     }
+
+    public void menu(){
+        System.out.println("-------MENU-------");
+        System.out.println("Veuillez taper 1 pour jouer ou 2 pour accéder au options");
+        System.out.println("1-JOUER");
+        System.out.println("2-OPTIONS");
+        Scanner scannerMenu = new Scanner(System.in);
+        int choixMenu = scannerMenu.nextInt();
+        if(choixMenu == 1){
+            start();
+        }
+        if(choixMenu == 2){
+            options();
+        }
+        else{
+            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+            menu();
+        }
+
+    }
+
+    public void options(){
+        System.out.println("-------OPTIONS-------");
+        System.out.println("Veuillez Sélectionner l'option souhaiter : ");
+        System.out.println("1-Grandeur du Plateau");
+        Scanner scannerOption = new Scanner(System.in);
+        int choixOption = scannerOption.nextInt();
+        if(choixOption == 1){
+            optionGrandeur();
+        }
+        else{
+            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+            options();
+        }
+    }
+
+    public void optionGrandeur(){
+        System.out.println("-----OPTIONS GRANDEUR-------");
+        System.out.println("Veuillez séléctionner la taille du plateau souhaiter");
+        System.out.println("1-Grand");
+        System.out.println("2-Moyen");
+        System.out.println("3-Petit");
+        Scanner scannerGrandeur = new Scanner(System.in);
+        int choixGrandeur = scannerGrandeur.nextInt();
+        if(choixGrandeur == 1){
+            Builder plateauBuilder = new PlateauBuilder();
+            Director director = new Director(plateauBuilder);
+            Plateau plateau = director.makeGrandPlateau();
+            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau);
+            System.err.println("Changement effectué !");
+            iu.menu();
+        }
+        if(choixGrandeur == 2){
+            Builder plateauBuilder = new PlateauBuilder();
+            Director director = new Director(plateauBuilder);
+            Plateau plateau = director.makeMoyenPlateau();
+            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau);
+            System.err.println("Changement effectué !");
+            iu.menu();
+        }
+        if(choixGrandeur == 3){
+            Builder plateauBuilder = new PlateauBuilder();
+            Director director = new Director(plateauBuilder);
+            Plateau plateau = director.makePetitPlateau();
+            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau);
+            System.err.println("Changement effectué !");
+            iu.menu();
+        }
+        else{
+            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+            optionGrandeur();
+
+        }
+
+    }
+
     public void start() {
 
         terrain.genererTerrain();
