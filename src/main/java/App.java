@@ -4,8 +4,9 @@ public class App {
 
         Builder plateauBuilder = new PlateauBuilder();
         Director director = new Director(plateauBuilder);
-        Plateau plateau = director.makeGrandPlateau();
-        InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau);
+        Plateau plateau = director.makePetitPlateau();
+        SimDifficultes difficultes = new SimDifficultes();
+        InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau, difficultes);
         iu.menu();
     }
 }

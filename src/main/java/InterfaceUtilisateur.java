@@ -8,11 +8,13 @@ public class InterfaceUtilisateur {
     private Jeu jeu;
     private Plateau plateau;
     private int casesLibresRestantes;
+    private SimDifficultes difficultes;
 
-    public InterfaceUtilisateur(Plateau plateau) {
-        this.jeu = new Jeu(plateau);
+    public InterfaceUtilisateur(Plateau plateau, SimDifficultes difficultes) {
+        this.jeu = new Jeu(plateau, difficultes);
         this.plateau = plateau;
         this.casesLibresRestantes= plateau.line * plateau.column - 5;
+        this.difficultes = difficultes;
     }
 
     public void menu(){
@@ -43,10 +45,14 @@ public class InterfaceUtilisateur {
         System.out.println("-------OPTIONS-------");
         System.out.println("Veuillez Sélectionner l'option souhaiter : ");
         System.out.println("1-Grandeur du Plateau");
+        System.out.println("2-Difficultée");
         Scanner scannerOption = new Scanner(System.in);
         int choixOption = scannerOption.nextInt();
         if(choixOption == 1){
             optionGrandeur();
+        }
+        if(choixOption == 2){
+            optionDifficultee();
         }
         else{
             System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
@@ -56,7 +62,7 @@ public class InterfaceUtilisateur {
 
     public void optionGrandeur(){
         System.out.println("-----OPTIONS GRANDEUR-------");
-        System.out.println("Veuillez séléctionner la taille du plateau souhaiter");
+        System.out.println("Veuillez séléctionner la taille du plateau souhaité");
         System.out.println("1-Grand");
         System.out.println("2-Moyen");
         System.out.println("3-Petit");
@@ -67,7 +73,7 @@ public class InterfaceUtilisateur {
             Builder plateauBuilder = new PlateauBuilder();
             Director director = new Director(plateauBuilder);
             Plateau plateau = director.makeGrandPlateau();
-            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau);
+            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau, difficultes);
             iu.menu();
         }
         if(choixGrandeur == 2){
@@ -75,7 +81,7 @@ public class InterfaceUtilisateur {
             Builder plateauBuilder = new PlateauBuilder();
             Director director = new Director(plateauBuilder);
             Plateau plateau = director.makeMoyenPlateau();
-            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau);
+            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau, difficultes);
             iu.menu();
         }
         if(choixGrandeur == 3){
@@ -83,7 +89,7 @@ public class InterfaceUtilisateur {
             Builder plateauBuilder = new PlateauBuilder();
             Director director = new Director(plateauBuilder);
             Plateau plateau = director.makePetitPlateau();
-            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau);
+            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau, difficultes);
             iu.menu();
         }
         else{
@@ -94,9 +100,43 @@ public class InterfaceUtilisateur {
 
     }
 
+    public void optionDifficultee(){
+        System.out.println("-----OPTIONS DIFFICULTÉS-------");
+        System.out.println("Veuillez séléctionner la difficultée souhaitée");
+        System.out.println("1-Facile");
+        System.out.println("2-Normal");
+        System.out.println("3-Difficile");
+        Scanner scannerDifficultes = new Scanner(System.in);
+        int choixDifficultes = scannerDifficultes.nextInt();
+        if(choixDifficultes == 1){
+            System.err.println("Changement effectué !");
+            difficultes.facile();
+            this.jeu = new Jeu(plateau, difficultes);
+            this.menu();
+        }
+        if(choixDifficultes == 2){
+            System.err.println("Changement effectué !");
+            difficultes.normal();
+            this.jeu = new Jeu(plateau, difficultes);
+            this.menu();
+        }
+        if(choixDifficultes == 3){
+            System.err.println("Changement effectué !");
+            difficultes.difficile();
+            this.jeu = new Jeu(plateau, difficultes);
+            this.menu();
+        }
+        else{
+            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+            optionDifficultee();
+
+        }
+
+    }
+
     public void start(){
         jeu.genererJeu();
-        Cases[][] cases = jeu.getCases();
+        SimCases[][] cases = jeu.getCases();
         List<String> lettres = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
         boolean finJeu = false;
         while(!finJeu){
@@ -106,17 +146,17 @@ public class InterfaceUtilisateur {
                 Scanner scannerJeu = new Scanner(System.in);
                 String action = scannerJeu.next().toUpperCase();
                 String[] actionSplit = action.split("");
-                Cases caseCourante = cases[lettres.indexOf(actionSplit[0])][Integer.parseInt(actionSplit[1])-1];
+                SimCases caseCourante = cases[lettres.indexOf(actionSplit[0])][Integer.parseInt(actionSplit[1])-1];
                 if (actionSplit.length == 3){
                     if(actionSplit[2].equals("F")) {
-                        if (caseCourante.getState().equals("?")) {
-                            caseCourante.setState("f");
+                        if (caseCourante.afficherStatus().equals("?")) {
+                            caseCourante.flagCases();
                         }
                     }
                 }
                 if (actionSplit.length == 2) {
-                    if (caseCourante.getState().equals("?") || caseCourante.getState().equals("f")) {
-                        caseCourante.setState(caseCourante.getValue());
+                    if (caseCourante.afficherStatus().equals("?") || caseCourante.afficherStatus().equals("f")) {
+                        caseCourante.ouvrirCases();
                         if (caseCourante.isBomb()) {
                             System.err.println("BOOM ! Dommage, vous avez perdu !");
                             jeu.afficherJeuTerminer();

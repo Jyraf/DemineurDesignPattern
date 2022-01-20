@@ -1,22 +1,24 @@
-import java.util.ArrayList;
-
 public class Jeu {
 
-    private Cases[][] cases;
+    private SimCases[][] cases;
+    private SimDifficultes difficultes;
     private Plateau plateau;
-    private int nbMines = 5;
-    private int nbMinesRestantes = 5;
+    private int nbMines;
+    private int nbMinesRestantes;
 
 
-    public Jeu(Plateau plateauJeu) {
-        cases = new Cases[plateauJeu.column][plateauJeu.line];
+    public Jeu(Plateau plateauJeu, SimDifficultes difficultes) {
+        cases = new SimCases[plateauJeu.column][plateauJeu.line];
         plateau = plateauJeu;
+        this.difficultes = difficultes;
+        nbMines = difficultes.nbBomb();
+        nbMinesRestantes = difficultes.nbBomb();
     }
 
     public void genererJeu() {
         for (int y = 0; y < cases.length; y++) {
             for (int x = 0; x < cases.length; x++) {
-                cases[y][x] = new Cases(x, y, "?", "0", false);
+                cases[y][x] = new SimCases(x, y,"0", false);
             }
         }
         genererMines();
@@ -39,7 +41,7 @@ public class Jeu {
     public void genererNumero() {
         for (int i = 0; i < plateau.line; i++) {
             for (int j = 0; j < plateau.column; j++) {
-                Cases caseCourante = cases[j][i];
+                SimCases caseCourante = cases[j][i];
                 if (caseCourante.isBomb()) {
                     caseCourante.setValue("b");
                     continue;
@@ -51,49 +53,49 @@ public class Jeu {
                 boolean aBas = (j + 1) < plateau.column;
 
                 if (aHaut) {
-                    Cases haut = cases[j - 1][i];
+                    SimCases haut = cases[j - 1][i];
                     if (haut.isBomb()) {
                         numTemp++;
                     }
                     if (aGauche) {
-                        Cases hautGauche = cases[j - 1][i - 1];
+                        SimCases hautGauche = cases[j - 1][i - 1];
                         if (hautGauche.isBomb()) {
                             numTemp++;
                         }
                     }
                     if (aDroite) {
-                        Cases hautDroite = cases[j - 1][i + 1];
+                        SimCases hautDroite = cases[j - 1][i + 1];
                         if (hautDroite.isBomb()) {
                             numTemp++;
                         }
                     }
                 }
                 if (aBas) {
-                    Cases bas = cases[j + 1][i];
+                    SimCases bas = cases[j + 1][i];
                     if (bas.isBomb()) {
                         numTemp++;
                     }
                     if (aGauche) {
-                        Cases basGauche = cases[j + 1][i - 1];
+                        SimCases basGauche = cases[j + 1][i - 1];
                         if (basGauche.isBomb()) {
                             numTemp++;
                         }
                     }
                     if (aDroite) {
-                        Cases basDroite = cases[j + 1][i + 1];
+                        SimCases basDroite = cases[j + 1][i + 1];
                         if (basDroite.isBomb()) {
                             numTemp++;
                         }
                     }
                 }
                 if (aGauche) {
-                    Cases gauche = cases[j][i - 1];
+                    SimCases gauche = cases[j][i - 1];
                     if (gauche.isBomb()) {
                         numTemp++;
                     }
                 }
                 if (aDroite) {
-                    Cases droite = cases[j][i + 1];
+                    SimCases droite = cases[j][i + 1];
                     if (droite.isBomb()) {
                         numTemp++;
                     }
@@ -116,7 +118,7 @@ public class Jeu {
         for (int y = 0; y < cases.length; y++) {
             System.out.print("\033[1;33m" + lettres[y] + "│");
             for (int x = 0; x < cases.length; x++) {
-                System.out.print("\033[1;35m" + cases[y][x].state + "\033[1;33m" + "│");
+                System.out.print("\033[1;35m" + cases[y][x].afficherStatus() + "\033[1;33m" + "│");
             }
 
             System.out.println();
@@ -124,26 +126,35 @@ public class Jeu {
     }
 
     public void afficherJeuTerminer(){
-        System.out.println();
-        System.out.print("\033[1;33m" + "X");
-        for (int i = 0; i < plateau.line; i++) {
-            System.out.print("│" + (i + 1));
-        }
-        System.out.print("│");
-        System.out.println();
-        String[] lettres = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
-        for (int y = 0; y < cases.length; y++) {
-            System.out.print("\033[1;33m" + lettres[y] + "│");
+        for (SimCases[] aCase : cases) {
             for (int x = 0; x < cases.length; x++) {
-                System.out.print("\033[1;35m" + cases[y][x].value + "\033[1;33m" + "│");
+                aCase[x].ouvrirCases();
             }
-
-            System.out.println();
         }
+        afficherJeu();
+//        System.out.println();
+//        System.out.print("\033[1;33m" + "X");
+//        for (int i = 0; i < plateau.line; i++) {
+//            System.out.print("│" + (i + 1));
+//        }
+//        System.out.print("│");
+//        System.out.println();
+//        String[] lettres = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+//        for (int y = 0; y < cases.length; y++) {
+//            System.out.print("\033[1;33m" + lettres[y] + "│");
+//            for (int x = 0; x < cases.length; x++) {
+//                System.out.print("\033[1;35m" + cases[y][x].getValue() + "\033[1;33m" + "│");
+//            }
+//
+//            System.out.println();
+//        }
     }
 
 
-    public Cases[][] getCases() {
+    public SimCases[][] getCases() {
         return cases;
     }
+
+
+
 }
