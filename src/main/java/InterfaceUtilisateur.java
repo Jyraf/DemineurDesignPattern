@@ -9,9 +9,10 @@ public class InterfaceUtilisateur {
     private Plateau plateau;
     private int casesLibresRestantes;
     private SimDifficultes difficultes;
+    private String couleur = "blanc" ;
 
-    public InterfaceUtilisateur(Plateau plateau, SimDifficultes difficultes) {
-        this.jeu = new Jeu(plateau, difficultes);
+    public InterfaceUtilisateur(Plateau plateau, SimDifficultes difficultes, String couleur) {
+        this.jeu = new Jeu(plateau, difficultes, couleur);
         this.plateau = plateau;
         this.casesLibresRestantes= plateau.line * plateau.column - 5;
         this.difficultes = difficultes;
@@ -46,6 +47,7 @@ public class InterfaceUtilisateur {
         System.out.println("Veuillez Sélectionner l'option souhaiter : ");
         System.out.println("1-Grandeur du Plateau");
         System.out.println("2-Difficultée");
+        System.out.println("3-Couleur");
         Scanner scannerOption = new Scanner(System.in);
         int choixOption = scannerOption.nextInt();
         if(choixOption == 1){
@@ -53,6 +55,9 @@ public class InterfaceUtilisateur {
         }
         if(choixOption == 2){
             optionDifficultee();
+        }
+        if(choixOption == 3){
+            optionCouleur();
         }
         else{
             System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
@@ -72,25 +77,25 @@ public class InterfaceUtilisateur {
             System.err.println("Changement effectué !");
             Builder plateauBuilder = new PlateauBuilder();
             Director director = new Director(plateauBuilder);
-            Plateau plateau = director.makeGrandPlateau();
-            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau, difficultes);
-            iu.menu();
+            plateau = director.makeGrandPlateau();
+            this.jeu = new Jeu(plateau, difficultes,couleur);
+            this.menu();
         }
         if(choixGrandeur == 2){
             System.err.println("Changement effectué !");
             Builder plateauBuilder = new PlateauBuilder();
             Director director = new Director(plateauBuilder);
-            Plateau plateau = director.makeMoyenPlateau();
-            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau, difficultes);
-            iu.menu();
+            plateau = director.makeMoyenPlateau();
+            this.jeu = new Jeu(plateau, difficultes,couleur);
+            this.menu();
         }
         if(choixGrandeur == 3){
             System.err.println("Changement effectué !");
             Builder plateauBuilder = new PlateauBuilder();
             Director director = new Director(plateauBuilder);
-            Plateau plateau = director.makePetitPlateau();
-            InterfaceUtilisateur iu = new InterfaceUtilisateur(plateau, difficultes);
-            iu.menu();
+            plateau = director.makePetitPlateau();
+            this.jeu = new Jeu(plateau, difficultes,couleur);
+            this.menu();
         }
         else{
             System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
@@ -111,19 +116,19 @@ public class InterfaceUtilisateur {
         if(choixDifficultes == 1){
             System.err.println("Changement effectué !");
             difficultes.facile();
-            this.jeu = new Jeu(plateau, difficultes);
+            this.jeu = new Jeu(plateau, difficultes,couleur);
             this.menu();
         }
         if(choixDifficultes == 2){
             System.err.println("Changement effectué !");
             difficultes.normal();
-            this.jeu = new Jeu(plateau, difficultes);
+            this.jeu = new Jeu(plateau, difficultes,couleur);
             this.menu();
         }
         if(choixDifficultes == 3){
             System.err.println("Changement effectué !");
             difficultes.difficile();
-            this.jeu = new Jeu(plateau, difficultes);
+            this.jeu = new Jeu(plateau, difficultes,couleur);
             this.menu();
         }
         else{
@@ -134,9 +139,79 @@ public class InterfaceUtilisateur {
 
     }
 
+    public void optionCouleur(){
+        System.out.println("-----OPTIONS COULEURS-------");
+        System.out.println("Veuillez séléctionner la couleur de case souhaitée");
+        System.out.println("1-" + "\u001B[30m" + "Noir" + "\u001B[0m");
+        System.out.println("2-" + "\u001B[31m" + "Rouge" + "\u001B[0m");
+        System.out.println("3-" + "\u001B[32m" + "Vert" + "\u001B[0m");
+        System.out.println("4-" + "\u001B[33m" + "Jaune" + "\u001B[0m");
+        System.out.println("5-" + "\u001B[34m" + "Bleu" + "\u001B[0m");
+        System.out.println("6-" + "\u001B[35m" + "Violet" + "\u001B[0m");
+        System.out.println("7-" + "\u001B[36m" + "Cyan" + "\u001B[0m");
+        System.out.println("8-" + "\u001B[37m" + "Gris" + "\u001B[0m");
+        Scanner scannerCouleur = new Scanner(System.in);
+        int choixCouleur = scannerCouleur.nextInt();
+        if(choixCouleur == 1){
+            System.err.println("Changement effectué !");
+            couleur = "noir";
+            this.jeu = new Jeu(plateau, difficultes, couleur);
+            this.menu();
+        }
+        if(choixCouleur == 2){
+            System.err.println("Changement effectué !");
+            couleur = "rouge";
+            this.jeu = new Jeu(plateau, difficultes, couleur);
+            this.menu();
+        }
+        if(choixCouleur == 3){
+            System.err.println("Changement effectué !");
+            couleur = "vert";
+            this.jeu = new Jeu(plateau, difficultes, couleur);
+            this.menu();
+        }
+        if(choixCouleur == 4){
+            System.err.println("Changement effectué !");
+            couleur = "jaune";
+            this.jeu = new Jeu(plateau, difficultes, couleur);
+            this.menu();
+        }
+        if(choixCouleur == 5){
+            System.err.println("Changement effectué !");
+            couleur = "bleu";
+            this.jeu = new Jeu(plateau, difficultes, couleur);
+            this.menu();
+        }
+        if(choixCouleur == 6){
+            System.err.println("Changement effectué !");
+            couleur = "violet";
+            this.jeu = new Jeu(plateau, difficultes, couleur);
+            this.menu();
+        }
+        if(choixCouleur == 7){
+            System.err.println("Changement effectué !");
+            couleur = "cyan";
+            this.jeu = new Jeu(plateau, difficultes, couleur);
+            this.menu();
+        }
+        if(choixCouleur == 8){
+            System.err.println("Changement effectué !");
+            couleur = "blanc";
+            this.jeu = new Jeu(plateau, difficultes, couleur);
+            this.menu();
+        }
+
+        else{
+            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+            optionDifficultee();
+
+        }
+
+    }
+
     public void start(){
         jeu.genererJeu();
-        SimCases[][] cases = jeu.getCases();
+        CasesDecorator[][] cases = jeu.getCases();
         List<String> lettres = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
         boolean finJeu = false;
         while(!finJeu){
@@ -146,16 +221,17 @@ public class InterfaceUtilisateur {
                 Scanner scannerJeu = new Scanner(System.in);
                 String action = scannerJeu.next().toUpperCase();
                 String[] actionSplit = action.split("");
-                SimCases caseCourante = cases[lettres.indexOf(actionSplit[0])][Integer.parseInt(actionSplit[1])-1];
+                CasesDecorator caseCourante = cases[lettres.indexOf(actionSplit[0])][Integer.parseInt(actionSplit[1])-1];
                 if (actionSplit.length == 3){
                     if(actionSplit[2].equals("F")) {
-                        if (caseCourante.afficherStatus().equals("?")) {
+                        if (caseCourante.getStatus().equals("?")) {
                             caseCourante.flagCases();
                         }
                     }
                 }
                 if (actionSplit.length == 2) {
-                    if (caseCourante.afficherStatus().equals("?") || caseCourante.afficherStatus().equals("f")) {
+
+                    if (caseCourante.getStatus().equals("?") || caseCourante.getStatus().equals("f")) {
                         caseCourante.ouvrirCases();
                         if (caseCourante.isBomb()) {
                             System.err.println("BOOM ! Dommage, vous avez perdu !");

@@ -14,9 +14,7 @@ public class CasesDecouvertes implements Cases{
     }
 
 
-    public void ouvrirCases() {
-
-    }
+    public void ouvrirCases() {}
 
     public void fermerCases() {
         sim_.changeCasesCachees();
@@ -43,6 +41,10 @@ public class CasesDecouvertes implements Cases{
     }
 
     public String afficherStatus(){
+        return getValue();
+    }
+
+    public String getStatus(){
         return getValue();
     }
 }

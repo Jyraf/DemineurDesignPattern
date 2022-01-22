@@ -52,4 +52,8 @@ public class CasesDrapeau implements Cases {
     public String afficherStatus(){
         return "f";
     }
+
+    public String getStatus(){
+        return "f";
+    }
 }

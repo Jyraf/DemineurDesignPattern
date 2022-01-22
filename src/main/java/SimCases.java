@@ -64,5 +64,9 @@ public class SimCases {
         return cases.afficherStatus();
     }
 
+    public String getStatus(){
+        return cases.getStatus();
+    }
+
 
 }

@@ -1,4 +1,4 @@
-public class CasesCachees implements Cases{
+public class CasesCachees implements Cases {
     private SimCases sim_;
     private int x;
     private int y;
@@ -13,7 +13,7 @@ public class CasesCachees implements Cases{
         this.isBomb = isBomb;
     }
 
-    public CasesCachees(SimCases sim){
+    public CasesCachees(SimCases sim) {
         this.sim_ = sim;
     }
 
@@ -45,7 +45,10 @@ public class CasesCachees implements Cases{
         isBomb = bomb;
     }
 
-    public String afficherStatus(){
+    public String afficherStatus() {
+        return "?";
+    }
+    public String getStatus(){
         return "?";
     }
 }

@@ -8,6 +8,7 @@ public interface Cases {
     boolean isBomb();
     void setBomb(boolean bool);
     String afficherStatus();
+    String getStatus();
 
 
 
