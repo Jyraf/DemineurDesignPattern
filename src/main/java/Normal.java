@@ -1,6 +1,7 @@
 public class Normal implements Difficultes{
     private SimDifficultes sim_;
 
+    //Etat de Difficultés correspondant a un nombre de bombe de 7
     public Normal(SimDifficultes sim){
         sim_ = sim;
     }

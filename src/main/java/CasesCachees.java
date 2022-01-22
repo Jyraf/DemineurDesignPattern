@@ -4,17 +4,13 @@ public class CasesCachees implements Cases {
     private int y;
     private String value;
     private boolean isBomb;
-
+    //Etat des cases permettant de créé des cases non découverte
     public CasesCachees(SimCases sim_, int x, int y, String value, boolean isBomb) {
         this.sim_ = sim_;
         this.x = x;
         this.y = y;
         this.value = value;
         this.isBomb = isBomb;
-    }
-
-    public CasesCachees(SimCases sim) {
-        this.sim_ = sim;
     }
 
     public void ouvrirCases() {

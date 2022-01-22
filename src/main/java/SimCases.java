@@ -6,6 +6,7 @@ public class SimCases {
 
     private Cases cases;
 
+    //Simulateur pour le state des cases
     public SimCases(int x, int y, String value, boolean isBomb) {
         casesCachees = new CasesCachees(this, x, y, value, isBomb);
         casesDecouvertes = new CasesDecouvertes(this, x, y, value, isBomb);

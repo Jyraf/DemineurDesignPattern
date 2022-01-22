@@ -4,7 +4,7 @@ public class CasesDrapeau implements Cases {
     private int y;
     private String value;
     private boolean isBomb;
-
+    //Etat des cases permettant de créé des cases Drapeau
     public CasesDrapeau(SimCases sim_, int x, int y, String value, boolean isBomb) {
         this.sim_ = sim_;
         this.x = x;

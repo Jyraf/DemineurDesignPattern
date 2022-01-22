@@ -5,7 +5,7 @@ public class SimDifficultes {
     private Difficultes difficile;
 
     private Difficultes difficultes;
-
+    //Simulateur pour le State de la difficultés
     public SimDifficultes(){
         facile = new Facile(this);
         normal = new Normal(this);

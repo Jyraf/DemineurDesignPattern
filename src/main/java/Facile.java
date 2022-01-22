@@ -1,6 +1,6 @@
 public class Facile implements Difficultes {
     private SimDifficultes sim_;
-
+    //Etat de Difficultés correspondant a un nombre de bombe de 5
     public Facile(SimDifficultes sim){
         sim_ = sim;
     }

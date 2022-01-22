@@ -1,6 +1,8 @@
 public abstract class CasesDecorator implements Cases {
     protected SimCases cases;
 
+    //Classe abstraite pour le Décorateur des cases
+
     public CasesDecorator(SimCases cases){
         this.cases = cases;
     }
@@ -48,9 +50,4 @@ public abstract class CasesDecorator implements Cases {
         return cases.getStatus();
     }
 
-    public void changeCasesCachees() { cases.changeCasesCachees(); }
-
-    public void changeCasesDecouvertes() { cases.changeCasesDecouvertes(); }
-
-    public void changeCasesDrapeau() { cases.changeCasesDrapeau(); }
 }
