@@ -1,9 +1,10 @@
-public class CasesBlanche extends CasesDecorator {
+public class DecorateurCaseBlanche extends DecoratorCase {
 
     //Gestion de la couleur blanche pour les cases grace au décorateur
-    public CasesBlanche(SimCases cases) {
+    public DecorateurCaseBlanche(Case cases) {
         super(cases);
     }
+
     //modification de la methode afficherStatus pour y ajouter la couleur
     @Override
     public String afficherStatus() {

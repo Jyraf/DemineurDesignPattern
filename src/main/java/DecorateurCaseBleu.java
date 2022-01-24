@@ -1,9 +1,10 @@
-public class CasesBleu extends CasesDecorator {
+public class DecorateurCaseBleu extends DecoratorCase {
 
     //Gestion de la couleur bleu pour les cases grace au décorateur
-    public CasesBleu(SimCases cases) {
+    public DecorateurCaseBleu(Case cases) {
         super(cases);
     }
+
     //modification de la methode afficherStatus pour y ajouter la couleur
     @Override
     public String afficherStatus() {

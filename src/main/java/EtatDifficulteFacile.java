@@ -1,7 +1,8 @@
-public class Facile implements Difficultes {
-    private SimDifficultes sim_;
+public class EtatDifficulteFacile implements EtatDifficulte {
+    private Difficulte sim_;
+
     //Etat de Difficultés correspondant a un nombre de bombe de 5
-    public Facile(SimDifficultes sim){
+    public EtatDifficulteFacile(Difficulte sim){
         sim_ = sim;
     }
 

@@ -1,4 +1,5 @@
 public interface Builder {
+
     //Builder pour le Plateau
     void  buildColumn(int column);
 

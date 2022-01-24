@@ -1,4 +1,5 @@
-public interface Difficultes {
+public interface EtatDifficulte {
+
     //State Difficultes
     void facile();
     void normal();

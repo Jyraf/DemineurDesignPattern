@@ -1,18 +1,18 @@
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class InterfaceUtilisateur {
-    //Déclaration des variable
+
+    //Déclaration des variables
     private Jeu jeu;
     private Plateau plateau;
     private int casesLibresRestantes;
-    private SimDifficultes difficultes;
+    private Difficulte difficultes;
     private String couleur = "blanc";
 
     //Constructeur
-    public InterfaceUtilisateur(Plateau plateau, SimDifficultes difficultes, String couleur) {
+    public InterfaceUtilisateur(Plateau plateau, Difficulte difficultes, String couleur) {
         this.jeu = new Jeu(plateau, difficultes, couleur);
         this.plateau = plateau;
         this.casesLibresRestantes = plateau.line * plateau.column - 5;
@@ -22,11 +22,12 @@ public class InterfaceUtilisateur {
     //Affichage du menu
     public void menu() {
         System.out.println("-------MENU-------");
-        System.out.println("Veuillez taper 1 pour jouer ou 2 pour accéder au options");
-        System.out.println("1-JOUER");
-        System.out.println("2-OPTIONS");
-        System.out.println("3-QUITTER");
+        System.out.println("Veuillez taper 1 pour jouer ou 2 pour accéder aux différentes options");
+        System.out.println("1- JOUER");
+        System.out.println("2- OPTIONS");
+        System.out.println("3- QUITTER");
         Scanner scannerMenu = new Scanner(System.in);
+
         //Gestion des choix du menu
         int choixMenu = scannerMenu.nextInt();
         if (choixMenu == 1) {
@@ -44,13 +45,14 @@ public class InterfaceUtilisateur {
 
     }
 
-    //Affiche des options
+    //Affichage des options
     public void options() {
         System.out.println("-------OPTIONS-------");
-        System.out.println("Veuillez Sélectionner l'option souhaiter : ");
-        System.out.println("1-Grandeur du Plateau");
-        System.out.println("2-Difficultée");
-        System.out.println("3-Couleur");
+        System.out.println("Veuillez Sélectionner l'option souhaitée : ");
+        System.out.println("1- Taille du Plateau");
+        System.out.println("2- Difficulté");
+        System.out.println("3- Couleur");
+
         //Gestion des choix des options
         Scanner scannerOption = new Scanner(System.in);
         int choixOption = scannerOption.nextInt();
@@ -75,6 +77,7 @@ public class InterfaceUtilisateur {
         System.out.println("1-Grand");
         System.out.println("2-Moyen");
         System.out.println("3-Petit");
+
         //Gestion des choix des option de grandeur
         Scanner scannerGrandeur = new Scanner(System.in);
         int choixGrandeur = scannerGrandeur.nextInt();
@@ -114,30 +117,31 @@ public class InterfaceUtilisateur {
 
     //Affichage des Options de difficultés
     public void optionDifficultee() {
-        System.out.println("-----OPTIONS DIFFICULTÉS-------");
-        System.out.println("Veuillez séléctionner la difficultée souhaitée");
-        System.out.println("1-Facile");
-        System.out.println("2-Normal");
-        System.out.println("3-Difficile");
-        //Gestion des choix des option de difficultés
+        System.out.println("-----OPTIONS DIFFICULTÉ-------");
+        System.out.println("Veuillez séléctionner la difficulté souhaitée");
+        System.out.println("1- Facile");
+        System.out.println("2- Normal");
+        System.out.println("3- Difficile");
+
+        //Gestion des choix des option de difficulté
         Scanner scannerDifficultes = new Scanner(System.in);
         int choixDifficultes = scannerDifficultes.nextInt();
         if (choixDifficultes == 1) {
-            System.err.println("Changement effectué !");
+            System.err.println("Changement effectué ! Le plateau contient désormais 5 bombes");
             //changement de la difficulté grace au State
             difficultes.facile();
             this.jeu = new Jeu(plateau, difficultes, couleur);
             this.menu();
         }
         if (choixDifficultes == 2) {
-            System.err.println("Changement effectué !");
+            System.err.println("Changement effectué ! Le plateau contient désormais 9 bombes");
             //changement de la difficulté grace au State
             difficultes.normal();
             this.jeu = new Jeu(plateau, difficultes, couleur);
             this.menu();
         }
         if (choixDifficultes == 3) {
-            System.err.println("Changement effectué !");
+            System.err.println("Changement effectué ! Le plateau contient désormais 15 bombes");
             //changement de la difficulté grace au State
             difficultes.difficile();
             this.jeu = new Jeu(plateau, difficultes, couleur);
@@ -151,8 +155,9 @@ public class InterfaceUtilisateur {
     }
     //Affichage des options pour les couleurs
     public void optionCouleur() {
-        System.out.println("-----OPTIONS COULEURS-------");
+        System.out.println("-----OPTIONS COULEUR-------");
         System.out.println("Veuillez séléctionner la couleur de case souhaitée");
+        System.out.println("(Cette option est purement esthétique, pour le plaisir de vos yeux)");
         System.out.println("1-" + "\u001B[30m" + "Noir" + "\u001B[0m");
         System.out.println("2-" + "\u001B[31m" + "Rouge" + "\u001B[0m");
         System.out.println("3-" + "\u001B[32m" + "Vert" + "\u001B[0m");
@@ -161,7 +166,8 @@ public class InterfaceUtilisateur {
         System.out.println("6-" + "\u001B[35m" + "Violet" + "\u001B[0m");
         System.out.println("7-" + "\u001B[36m" + "Cyan" + "\u001B[0m");
         System.out.println("8-" + "\u001B[37m" + "Gris" + "\u001B[0m");
-        //Gestion des choix des option de couleur
+
+        //Gestion des choix des options de couleur
         Scanner scannerCouleur = new Scanner(System.in);
         int choixCouleur = scannerCouleur.nextInt();
         if (choixCouleur == 1) {
@@ -223,23 +229,27 @@ public class InterfaceUtilisateur {
     public void start() {
         jeu.genererJeu();
         //récupération des cases du jeu
-        CasesDecorator[][] cases = jeu.getCases();
+        DecoratorCase[][] cases = jeu.getCases();
         List<String> lettres = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
         boolean finJeu = false;
         //tant que le jeu n'est pas fini
         while (!finJeu) {
             //on affiche le jeu
             jeu.afficherJeu();
-            //on demande les coordonnée de la case souhaité
-            System.out.println("Veuillez écrire les coordonnées de la case souhaité (ex : A1 ou C5) Si vous voulez poser un drapeau, ajouter un 'F' a la fin (ex: A1F ou C5F)");
+            //on demande les coordonnées de la case souhaitée
+            System.out.println("Veuillez écrire les coordonnées de la case que vous souhaitez miner (ex : A1 ou C5)");
+            System.out.println("Si vous pensez qu'une bomne se trouve sur une case, ajouter un 'F' a la fin pour afficher un Drapeau (ex: A1F ou C5F)");
             try {
                 //gestion du choix de l'utilisateur
                 Scanner scannerJeu = new Scanner(System.in);
                 String action = scannerJeu.next().toUpperCase();
+
                 //split de la chaine pour recuperer les valeur que l'on veut
                 String[] actionSplit = action.split("");
+
                 //récupération de la case voulu grace au instruction de l'utilisateur
-                CasesDecorator caseCourante = cases[lettres.indexOf(actionSplit[0])][Integer.parseInt(actionSplit[1]) - 1];
+                DecoratorCase caseCourante = cases[lettres.indexOf(actionSplit[0])][Integer.parseInt(actionSplit[1]) - 1];
+
                 //si le mot taper est de 3 lettre (il y a donc sois une erreur sois un F pour flag
                 if (actionSplit.length == 3) {
                     //si le dernier caractere est un f alors
@@ -260,7 +270,7 @@ public class InterfaceUtilisateur {
                         //si la case courante est une bombe,
                         if (caseCourante.isBomb()) {
                             //C'est perdu, on arrete le jeu et on demande si l'utilisateur veut rejouer
-                            System.err.println("BOOM ! Dommage, vous avez perdu !");
+                            System.err.println("BOOM ! Dommage, vous avez perdu et explosé !");
                             jeu.afficherJeuTerminer();
                             finJeu = true;
                             //sinon,
@@ -273,7 +283,7 @@ public class InterfaceUtilisateur {
                 //Si il n'y a plus de case libre restante,
                 if (casesLibresRestantes == 0) {
                     //c'est gagner, on arrete le jeu et on demande si l'utilisateur veut rejouer
-                    System.err.println("Félicitation ! vous avez gagner !");
+                    System.err.println("Félicitation ! vous avez déminé le terrain !");
                     jeu.afficherJeuTerminer();
                     finJeu = true;
                 }
@@ -283,26 +293,9 @@ public class InterfaceUtilisateur {
             }
 
         }
-        //apres que le jeu sois finis, on remet le menu pour rejouer ou acceder au options
-        System.out.println("Jeux terminer ! Veuillez choisir une Options: ");
-        System.out.println("1-REJOUER");
-        System.out.println("2-OPTIONS");
-        System.out.println("3-QUITTER");
-        Scanner scannerMenu = new Scanner(System.in);
-        //gestion des choix du menu
-        int choixMenu = scannerMenu.nextInt();
-        if (choixMenu == 1) {
-            start();
-        }
-        if (choixMenu == 2) {
-            options();
-        }
-        if (choixMenu == 3) {
-            System.exit(0);
-        } else {
-            System.err.println("Entrée invalide, veuillez séléctionner une réponse valide");
-            menu();
-        }
+        //apres que le jeu soit fini, on remet le menu pour rejouer ou acceder aux options
+        System.out.println("Jeux terminé !");
+        menu();
     }
 
 }

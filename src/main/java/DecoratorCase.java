@@ -1,9 +1,9 @@
-public abstract class CasesDecorator implements Cases {
-    protected SimCases cases;
+public abstract class DecoratorCase implements EtatCase {
+    protected Case cases;
 
     //Classe abstraite pour le Décorateur des cases
 
-    public CasesDecorator(SimCases cases){
+    public DecoratorCase(Case cases){
         this.cases = cases;
     }
 

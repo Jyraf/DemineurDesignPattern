@@ -1,11 +1,13 @@
-public class CasesDrapeau implements Cases {
-    private SimCases sim_;
+public class EtatCaseDrapeau implements EtatCase {
+
+    private Case sim_;
     private int x;
     private int y;
     private String value;
     private boolean isBomb;
+
     //Etat des cases permettant de créé des cases Drapeau
-    public CasesDrapeau(SimCases sim_, int x, int y, String value, boolean isBomb) {
+    public EtatCaseDrapeau(Case sim_, int x, int y, String value, boolean isBomb) {
         this.sim_ = sim_;
         this.x = x;
         this.y = y;
@@ -13,7 +15,7 @@ public class CasesDrapeau implements Cases {
         this.isBomb = isBomb;
     }
 
-    public CasesDrapeau(SimCases sim){
+    public EtatCaseDrapeau(Case sim){
         this.sim_ = sim;
     }
 

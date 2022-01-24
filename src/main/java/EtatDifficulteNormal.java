@@ -1,8 +1,8 @@
-public class Normal implements Difficultes{
-    private SimDifficultes sim_;
+public class EtatDifficulteNormal implements EtatDifficulte {
+    private Difficulte sim_;
 
-    //Etat de Difficultés correspondant a un nombre de bombe de 7
-    public Normal(SimDifficultes sim){
+    //Etat de Difficultés correspondant a un nombre de bombe de 10
+    public EtatDifficulteNormal(Difficulte sim){
         sim_ = sim;
     }
 
@@ -24,6 +24,6 @@ public class Normal implements Difficultes{
 
     @Override
     public int nbBombe() {
-        return 7;
+        return 10;
     }
 }

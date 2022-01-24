@@ -1,11 +1,13 @@
-public class CasesCachees implements Cases {
-    private SimCases sim_;
+public class EtatCaseCachee implements EtatCase {
+
+    private Case sim_;
     private int x;
     private int y;
     private String value;
     private boolean isBomb;
+
     //Etat des cases permettant de créé des cases non découverte
-    public CasesCachees(SimCases sim_, int x, int y, String value, boolean isBomb) {
+    public EtatCaseCachee(Case sim_, int x, int y, String value, boolean isBomb) {
         this.sim_ = sim_;
         this.x = x;
         this.y = y;

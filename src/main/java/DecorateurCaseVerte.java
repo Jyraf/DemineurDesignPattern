@@ -1,9 +1,10 @@
-public class CasesVerte extends CasesDecorator {
+public class DecorateurCaseVerte extends DecoratorCase {
 
     //Gestion de la couleur Verte pour les cases grace au décorateur
-    public CasesVerte(SimCases cases) {
+    public DecorateurCaseVerte(Case cases) {
         super(cases);
     }
+
     //modification de la methode afficherStatus pour y ajouter la couleur
     @Override
     public String afficherStatus() {
