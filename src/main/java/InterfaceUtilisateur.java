@@ -81,37 +81,29 @@ public class InterfaceUtilisateur {
         //Gestion des choix des option de grandeur
         Scanner scannerGrandeur = new Scanner(System.in);
         int choixGrandeur = scannerGrandeur.nextInt();
-        if (choixGrandeur == 1) {
-            System.err.println("Changement effectué !");
-            //création d'un nouveau plateau a l'aide du builder
-            Builder plateauBuilder = new PlateauBuilder();
-            Director director = new Director(plateauBuilder);
-            plateau = director.makeGrandPlateau();
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixGrandeur == 2) {
-            System.err.println("Changement effectué !");
-            //création d'un nouveau plateau a l'aide du builder
-            Builder plateauBuilder = new PlateauBuilder();
-            Director director = new Director(plateauBuilder);
-            plateau = director.makeMoyenPlateau();
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixGrandeur == 3) {
-            System.err.println("Changement effectué !");
-            //création d'un nouveau plateau a l'aide du builder
-            Builder plateauBuilder = new PlateauBuilder();
-            Director director = new Director(plateauBuilder);
-            plateau = director.makePetitPlateau();
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        } else {
-            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
-            optionGrandeur();
 
+        //création d'un nouveau plateau a l'aide du builder
+        Builder plateauBuilder = new PlateauBuilder();
+        Director director = new Director(plateauBuilder);
+
+        switch(choixGrandeur){
+            case 1:
+                plateau = director.makeGrandPlateau();
+                break;
+            case 2:
+                plateau = director.makeMoyenPlateau();
+                break;
+            case 3:
+                plateau = director.makePetitPlateau();
+                break;
+            default:
+                System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+                optionGrandeur();
+                break;
         }
+        System.err.println("Changement effectué !");
+        this.jeu = new Jeu(plateau, difficultes, couleur);
+        this.menu();
 
     }
 
@@ -126,33 +118,27 @@ public class InterfaceUtilisateur {
         //Gestion des choix des option de difficulté
         Scanner scannerDifficultes = new Scanner(System.in);
         int choixDifficultes = scannerDifficultes.nextInt();
-        if (choixDifficultes == 1) {
-            System.err.println("Changement effectué ! Le plateau contient désormais 5 bombes");
-            //changement de la difficulté grace au State
-            difficultes.facile();
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixDifficultes == 2) {
-            System.err.println("Changement effectué ! Le plateau contient désormais 9 bombes");
-            //changement de la difficulté grace au State
-            difficultes.normal();
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixDifficultes == 3) {
-            System.err.println("Changement effectué ! Le plateau contient désormais 15 bombes");
-            //changement de la difficulté grace au State
-            difficultes.difficile();
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        } else {
-            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
-            optionDifficultee();
 
+        switch(choixDifficultes){
+            case 1:
+                difficultes.facile();
+                break;
+            case 2:
+                difficultes.normal();
+                break;
+            case 3:
+                difficultes.difficile();
+                break;
+            default:
+                System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+                optionDifficultee();
+                break;
         }
-
+        System.err.println("Changement effectué ! Le plateau contient désormais " + difficultes.nbBomb() + " bombes");
+        this.jeu = new Jeu(plateau, difficultes, couleur);
+        this.menu();
     }
+
     //Affichage des options pour les couleurs
     public void optionCouleur() {
         System.out.println("-----OPTIONS COULEUR-------");
@@ -170,59 +156,40 @@ public class InterfaceUtilisateur {
         //Gestion des choix des options de couleur
         Scanner scannerCouleur = new Scanner(System.in);
         int choixCouleur = scannerCouleur.nextInt();
-        if (choixCouleur == 1) {
-            System.err.println("Changement effectué !");
-            couleur = "noir";
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixCouleur == 2) {
-            System.err.println("Changement effectué !");
-            couleur = "rouge";
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixCouleur == 3) {
-            System.err.println("Changement effectué !");
-            couleur = "vert";
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixCouleur == 4) {
-            System.err.println("Changement effectué !");
-            couleur = "jaune";
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixCouleur == 5) {
-            System.err.println("Changement effectué !");
-            couleur = "bleu";
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixCouleur == 6) {
-            System.err.println("Changement effectué !");
-            couleur = "violet";
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixCouleur == 7) {
-            System.err.println("Changement effectué !");
-            couleur = "cyan";
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        }
-        if (choixCouleur == 8) {
-            System.err.println("Changement effectué !");
-            couleur = "blanc";
-            this.jeu = new Jeu(plateau, difficultes, couleur);
-            this.menu();
-        } else {
-            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
-            optionDifficultee();
 
+        switch(choixCouleur){
+            case 1:
+                couleur = "noir";
+                break;
+            case 2:
+                couleur = "rouge";
+                break;
+            case 3:
+                couleur = "vert";
+                break;
+            case 4:
+                couleur = "jaune";
+                break;
+            case 5:
+                couleur = "bleu";
+                break;
+            case 6:
+                couleur = "violet";
+                break;
+            case 7:
+                couleur = "cyan";
+                break;
+            case 8:
+                couleur = "blanc";
+                break;
+            default:
+                System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+                optionCouleur();
+                break;
         }
-
+        System.err.println("Changement effectué !");
+        this.jeu = new Jeu(plateau, difficultes, couleur);
+        this.menu();
     }
 
     //Affichage du jeu
