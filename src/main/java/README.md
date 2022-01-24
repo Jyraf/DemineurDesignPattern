@@ -1,25 +1,27 @@
 #Demineur Avec Design Pattern
 Réalisé par Alexia Bossiere, Soukaina Fauberteau et Lucas Lelong
 
-##Build the application
+##Builder l'application
 Utilisez gradle pour build l'application :
 ```shell
 gradle build
 ```
 
-##Test the Application
+##Tester l'application
 Pour réaliser les tests l'application, utilisez également gradle:
 ```shell
 gradle test
 ```
-##Design Pattern
-Pour cette application, nous avons pour consigne d'utiliser au moins 3 design pattern.
+##Designs Patterns
+Pour cette application, nous avions pour consigne d'utiliser au moins 3 design pattern.
+Nous avons donc décidé d'utiliser un builder, un decorator et deux state.
 
 ###Builder
-La première est le builder, nous avons eu besoin de ce builder pour créer un plateau de jeu de taille personnalisée. Grace a son Directeur qui nous as permis de créer rapidement trois tailles de plateau prédéfini, nous avons pu intégrer ce design pattern facilement.
+Tout d'abord, nous avons eu besoin d'un builder pour créer un plateau de différentes tailles.  Grace a son Directeur qui nous a permit de créer rapidement trois tailles de plateau prédéfinis. Nous avons pu intégrer ce design pattern facilement.
 
 ###State
-Le deuxième est le state. Nous l'avons utilisé deux fois en tout. La première a été pour gérer les cases du jeu pour determiner leur nature (Ouverte, Fermé, ou avec un Drapeau) La deuxième a été pour gérer la difficulté du jeu, Pour pouvoir modifier le nombre de bombes générer en fonction que ce que l'utilisateur a choisi. (Facile, Normal, Difficile).
+Le deuxième pattern qui nous a été nécessaire est le state. Nous l'avons utilisé deux fois. La première a été pour gérer les cases du jeu pour determiner leur nature (Affichée, Cachée, ou avec un Drapeau). 
+La deuxième a été utilisée pour gérer la difficulté du jeu. Pour pouvoir modifier le nombre de bombes générées en fonction que ce que l'utilisateur a choisi. (mode Facile, Normal ou Difficile).
 
 ###Decorator
-Le dernier est le Décorator, Grace à lui, nous voulions ajouter de la couleur choisit par l'utilisateur pour les cases du démineur. Il nous a donc permis de gérer la couleur des cases du démineur en créant un objet modifiant juste la methode afficherStatus() en ajoutant de la couleur.
+Le dernier est le Decorator. Grâce à lui, nous voulions ajouter de la couleur choisie par l'utilisateur pour les cases du démineur. La couleur des cases du démineur est donc affichée en créant un objet qui modifie juste la methode afficherStatus() en ajoutant de la couleur.
