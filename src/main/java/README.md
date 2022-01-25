@@ -32,3 +32,7 @@ La deuxième a été utilisée pour gérer la difficulté du jeu. Pour pouvoir m
 
 ###Decorator
 Le dernier est le Decorator. Grâce à lui, nous voulions ajouter de la couleur choisie par l'utilisateur pour les cases du démineur. La couleur des cases du démineur est donc affichée en créant un objet qui modifie juste la methode afficherStatus() en ajoutant de la couleur.
+
+##Diagramme de Classe
+
+Notre diagramme de classe se trouve dans le dépot à la racine du projet avec ce nom-ci : demineur_Diagramme_UML_AlexiaSoukainaLucas

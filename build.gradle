@@ -14,9 +14,16 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }
 
-test {
+test{
     useJUnitPlatform()
+
+
+    afterTest { descriptor, result ->
+        logger.lifecycle("Running Test : " + descriptor + " : " + result)
+    }
+
 }
+
 
 
 task runApp(type: JavaExec) {
