@@ -15,15 +15,15 @@ public class Difficulte {
     }
 
     public void facile(){
-        etatDifficulte.facile();
+        etatDifficulte.setDifficulteFacile();
     }
 
     public void normal(){
-        etatDifficulte.normal();
+        etatDifficulte.setDifficulteNormal();
     }
 
     public void difficile(){
-        etatDifficulte.difficile();
+        etatDifficulte.setDifficulteDifficile();
     }
 
     public int nbBomb(){

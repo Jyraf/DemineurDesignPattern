@@ -16,15 +16,9 @@ public class EtatCaseDecouverte implements EtatCase {
     }
 
 
-    public void ouvrirCases() {}
+    public void selectionnerCase() {}
 
-    public void fermerCases() {
-        sim_.changeCasesCachees();
-    }
-
-    public void flagCases() {
-        sim_.changeCasesDrapeau();
-    }
+    public void drapeauCase() {}
 
     public String getValue() {
         return value;

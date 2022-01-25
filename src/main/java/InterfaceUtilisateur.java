@@ -259,7 +259,7 @@ public class InterfaceUtilisateur {
     public void start() {
         jeu.genererJeu();
         //récupération des cases du jeu
-        DecoratorCase[][] cases = jeu.getCases();
+        DecorateurCase[][] cases = jeu.getCases();
         List<String> lettres = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I");
         boolean finJeu = false;
         //tant que le jeu n'est pas fini
@@ -274,57 +274,53 @@ public class InterfaceUtilisateur {
                 Scanner scannerJeu = new Scanner(System.in);
                 String action = scannerJeu.next().toUpperCase();
 
-                //split de la chaine pour recuperer les valeur que l'on veut
+                //split de la chaine pour recuperer les valeurs que l'on veut
                 String[] actionSplit = action.split("");
 
                 //récupération de la case voulu grace au instruction de l'utilisateur
-                DecoratorCase caseCourante = cases[lettres.indexOf(actionSplit[0])][Integer.parseInt(actionSplit[1]) - 1];
+                DecorateurCase caseCourante = cases[lettres.indexOf(actionSplit[0])][Integer.parseInt(actionSplit[1]) - 1];
 
-                //si le mot taper est de 3 lettre (il y a donc sois une erreur sois un F pour flag
+                //si le mot tapé est de 3 lettres (il y a donc soit une erreur soit un F pour flag
                 if (actionSplit.length == 3) {
                     //si le dernier caractere est un f alors
                     if (actionSplit[2].equals("F")) {
-                        //si la case courante n'est pas encore decouverte
-                        if (caseCourante.getStatus().equals("?")) {
-                            //on utilise le state des cases pour la changer en une case Drapeau
-                            caseCourante.flagCases();
-                        }
+                        //on utilise le state des cases pour la changer en une case Drapeau / cachée
+                        caseCourante.drapeauCase();
+                    } else {
+                        System.err.println("Entrée invalide, veuillez utiliser le format souhaité");
                     }
                 }
                 //Si il y a 2 caractere
                 if (actionSplit.length == 2) {
-                    //on test si la case est une case caché ou une case drapeau
-                    if (caseCourante.getStatus().equals("?") || caseCourante.getStatus().equals("f")) {
-                        //si oui on ouvre la case grace au Status Cases
-                        caseCourante.ouvrirCases();
-                        //si la case courante est une bombe,
-                        if (caseCourante.isBomb()) {
-                            //C'est perdu, on arrete le jeu et on demande si l'utilisateur veut rejouer
-                            System.err.println("BOOM ! Dommage, vous avez perdu et explose !");
-                            jeu.afficherJeuTerminer();
-                            finJeu = true;
-                            //sinon,
-                        } else {
-                            //on retire une case libre au cases libres restante
-                            casesLibresRestantes--;
-                        }
+                    //si la case courante est une bombe,
+                    if (caseCourante.isBomb()) {
+                        //C'est perdu, on arrete le jeu et on demande si l'utilisateur veut rejouer
+                        System.err.println("BOOM ! Dommage, vous avez perdu et explosé !");
+                        jeu.afficherJeuTerminer();
+                        finJeu = true;
+
+                        //sinon, si la case n'a pas été ouverte précédemment :
+                    } else if(caseCourante.getStatus().equals("?") || caseCourante.getStatus().equals("f")){
+                        //on retire une case libre aux cases libres restantes
+                        casesLibresRestantes--;
                     }
+                    caseCourante.selectionnerCase();
                 }
                 //Si il n'y a plus de case libre restante,
                 if (casesLibresRestantes == 0) {
-                    //c'est gagner, on arrete le jeu et on demande si l'utilisateur veut rejouer
-                    System.err.println("Felicitation ! vous avez demine le terrain !");
+                    //c'est gagne, on arrete le jeu et on demande si l'utilisateur veut rejouer
+                    System.err.println("Felicitation ! Vous avez demine le terrain !");
                     jeu.afficherJeuTerminer();
                     finJeu = true;
                 }
-                //si ya aucune correspondance avec ces cas las on emet une erreur pour que l'utilisateur puisse retenter d'ecrire la case voulu
+                //si ya aucune correspondance avec ces cas là on emet une erreur pour que l'utilisateur puisse retenter d'ecrire la case voulue
             } catch (Exception e) {
                 System.err.println("Entree invalide, veuillez utiliser le format souhaite");
             }
 
         }
         //apres que le jeu soit fini, on remet le menu pour rejouer ou acceder aux options
-        System.out.println("Jeux termine !");
+        System.out.println("Partie terminee !");
         menu();
     }
 

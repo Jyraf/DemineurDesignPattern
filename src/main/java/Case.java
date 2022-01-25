@@ -15,16 +15,12 @@ public class Case {
         etatCase = etatCaseCachees;
     }
 
-    public void ouvrirCases() {
-        etatCase.ouvrirCases();
+    public void selectionnerCase() {
+        etatCase.selectionnerCase();
     }
 
-    public void fermerCases() {
-        etatCase.fermerCases();
-    }
-
-    public void flagCases() {
-        etatCase.flagCases();
+    public void drapeauCase() {
+        etatCase.drapeauCase();
     }
 
     public void changeCasesCachees() {

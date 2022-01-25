@@ -1,25 +1,20 @@
-public abstract class DecoratorCase implements EtatCase {
+public abstract class DecorateurCase implements EtatCase {
     protected Case cases;
 
     //Classe abstraite pour le Décorateur des cases
 
-    public DecoratorCase(Case cases){
+    public DecorateurCase(Case cases){
         this.cases = cases;
     }
 
     @Override
-    public void ouvrirCases() {
-        cases.ouvrirCases();
+    public void selectionnerCase() {
+        cases.selectionnerCase();
     }
 
     @Override
-    public void fermerCases() {
-        cases.fermerCases();
-    }
-
-    @Override
-    public void flagCases() {
-        cases.flagCases();
+    public void drapeauCase() {
+        cases.drapeauCase();
     }
 
     @Override

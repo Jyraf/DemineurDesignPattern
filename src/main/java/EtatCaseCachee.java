@@ -15,15 +15,11 @@ public class EtatCaseCachee implements EtatCase {
         this.isBomb = isBomb;
     }
 
-    public void ouvrirCases() {
+    public void selectionnerCase() {
         sim_.changeCasesDecouvertes();
     }
 
-    public void fermerCases() {
-        System.out.println("La case est deja cachee");
-    }
-
-    public void flagCases() {
+    public void drapeauCase() {
         sim_.changeCasesDrapeau();
     }
 

@@ -6,18 +6,18 @@ public class EtatDifficulteDifficile implements EtatDifficulte {
         sim_ = sim;
     }
 
-    public void facile() {
+    public void setDifficulteFacile() {
         sim_.changeFacile();
     }
 
 
-    public void normal() {
+    public void setDifficulteNormal() {
         sim_.changeNormal();
     }
 
 
-    public void difficile() {
-        System.out.println("Difficultee deja en difficile");
+    public void setDifficulteDifficile() {
+
     }
 
 

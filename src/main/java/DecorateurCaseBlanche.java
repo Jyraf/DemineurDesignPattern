@@ -1,4 +1,4 @@
-public class DecorateurCaseBlanche extends DecoratorCase {
+public class DecorateurCaseBlanche extends DecorateurCase {
 
     //Gestion de la couleur blanche pour les cases grace au décorateur
     public DecorateurCaseBlanche(Case cases) {

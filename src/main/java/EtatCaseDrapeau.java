@@ -19,11 +19,11 @@ public class EtatCaseDrapeau implements EtatCase {
         this.sim_ = sim;
     }
 
-    public void ouvrirCases() {
+    public void selectionnerCase() {
         sim_.changeCasesDecouvertes();
     }
 
-    public void fermerCases() {
+    public void drapeauCase() {
         sim_.changeCasesCachees();
     }
 

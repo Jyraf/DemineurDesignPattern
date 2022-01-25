@@ -1,6 +1,6 @@
 public class Jeu {
     //déclaration des variable
-    private DecoratorCase[][] cases;
+    private DecorateurCase[][] cases;
     private Difficulte difficultes;
     private String couleur;
     private Plateau plateau;
@@ -9,7 +9,7 @@ public class Jeu {
 
     //Contrcution du jeu
     public Jeu(Plateau plateauJeu, Difficulte difficultes, String couleur) {
-        cases = new DecoratorCase[plateauJeu.column][plateauJeu.line];
+        cases = new DecorateurCase[plateauJeu.column][plateauJeu.line];
         plateau = plateauJeu;
         this.difficultes = difficultes;
         nbMines = difficultes.nbBomb();
@@ -81,7 +81,7 @@ public class Jeu {
         for (int i = 0; i < plateau.line; i++) {
             for (int j = 0; j < plateau.column; j++) {
                 //on récupère la case courante
-                DecoratorCase caseCourante = cases[j][i];
+                DecorateurCase caseCourante = cases[j][i];
                 //si la case est une bombe, on défini sa valeur par "b" puis on passe a la case suivante
                 if (caseCourante.isBomb()) {
                     caseCourante.setValue("b");
@@ -101,7 +101,7 @@ public class Jeu {
                 //si la case a une case en haut
                 if (aHaut) {
                     //on regarde la case du haut
-                    DecoratorCase haut = cases[j - 1][i];
+                    DecorateurCase haut = cases[j - 1][i];
                     //si elle a une bombe
                     if (haut.isBomb()) {
                         //on incremente le numéro finale de 1
@@ -110,7 +110,7 @@ public class Jeu {
                     //si la case a une case en haut a gauche
                     if (aGauche) {
                         //on regarde la case en haut a gauche
-                        DecoratorCase hautGauche = cases[j - 1][i - 1];
+                        DecorateurCase hautGauche = cases[j - 1][i - 1];
                         //si la case a une bombe on incrémente de 1
                         if (hautGauche.isBomb()) {
                             numTemp++;
@@ -119,7 +119,7 @@ public class Jeu {
                     //si la case a une case en haut a droite
                     if (aDroite) {
                         //on regarde la case en haut a droite
-                        DecoratorCase hautDroite = cases[j - 1][i + 1];
+                        DecorateurCase hautDroite = cases[j - 1][i + 1];
                         //si la case a une bombe on incrémente de 1
                         if (hautDroite.isBomb()) {
                             numTemp++;
@@ -129,7 +129,7 @@ public class Jeu {
                 //si la case a une case en bas
                 if (aBas) {
                     //on regarde la base du bas
-                    DecoratorCase bas = cases[j + 1][i];
+                    DecorateurCase bas = cases[j + 1][i];
                     //si la case a une bombe on incrémente de 1
                     if (bas.isBomb()) {
                         numTemp++;
@@ -137,7 +137,7 @@ public class Jeu {
                     //si la case a une case en bas a gauche
                     if (aGauche) {
                         //on regarde la case en bas a gauche
-                        DecoratorCase basGauche = cases[j + 1][i - 1];
+                        DecorateurCase basGauche = cases[j + 1][i - 1];
                         //si la case a une bombe on incrémente de 1
                         if (basGauche.isBomb()) {
                             numTemp++;
@@ -146,7 +146,7 @@ public class Jeu {
                     //si la case a une case en bas a droite
                     if (aDroite) {
                         //on regarde la case en bas a droite
-                        DecoratorCase basDroite = cases[j + 1][i + 1];
+                        DecorateurCase basDroite = cases[j + 1][i + 1];
                         //si la case a une bombe on incrémente de 1
                         if (basDroite.isBomb()) {
                             numTemp++;
@@ -156,7 +156,7 @@ public class Jeu {
                 //si la case a une case à gauche
                 if (aGauche) {
                     //On regarde la case de gauche
-                    DecoratorCase gauche = cases[j][i - 1];
+                    DecorateurCase gauche = cases[j][i - 1];
                     //si la case a une bombe on incrémente de 1
                     if (gauche.isBomb()) {
                         numTemp++;
@@ -165,7 +165,7 @@ public class Jeu {
                 //si la case a une case a droite
                 if (aDroite) {
                     //on regarde la case a droite
-                    DecoratorCase droite = cases[j][i + 1];
+                    DecorateurCase droite = cases[j][i + 1];
                     //si la case a une bombe on incrémente de 1
                     if (droite.isBomb()) {
                         numTemp++;
@@ -204,16 +204,16 @@ public class Jeu {
 
     //dévoilement de toute les case du jeu lorsque l'on a perdu ou gagner
     public void afficherJeuTerminer(){
-        for (DecoratorCase[] aCase : cases) {
+        for (DecorateurCase[] aCase : cases) {
             for (int x = 0; x < cases.length; x++) {
-                aCase[x].ouvrirCases();
+                aCase[x].selectionnerCase();
             }
         }
         afficherJeu();
     }
 
 
-    public DecoratorCase[][] getCases() {
+    public DecorateurCase[][] getCases() {
         return cases;
     }
 

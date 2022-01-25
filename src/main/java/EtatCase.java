@@ -1,11 +1,9 @@
 public interface EtatCase {
 
     //Interfaces des cases du démineur pour le State Case
-    void ouvrirCases();
+    void selectionnerCase();
 
-    void fermerCases();
-
-    void flagCases();
+    void drapeauCase();
 
     String getValue();
 

@@ -7,17 +7,16 @@ public class EtatDifficulteFacile implements EtatDifficulte {
     }
 
     @Override
-    public void facile() {
-        System.out.println("La difficultee est deja en Facile");
+    public void setDifficulteFacile() {
     }
 
     @Override
-    public void normal() {
+    public void setDifficulteNormal() {
         sim_.changeNormal();
     }
 
     @Override
-    public void difficile() {
+    public void setDifficulteDifficile() {
         sim_.changeDifficile();
     }
 
