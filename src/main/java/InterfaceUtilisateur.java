@@ -21,15 +21,27 @@ public class InterfaceUtilisateur {
 
     //Affichage du menu
     public void menu() {
+
         System.out.println("-------MENU-------");
-        System.out.println("Veuillez taper 1 pour jouer ou 2 pour accéder aux différentes options");
+        System.out.println("Veuillez taper 1 pour jouer ou 2 pour acceder aux differentes options");
         System.out.println("1- JOUER");
         System.out.println("2- OPTIONS");
         System.out.println("3- QUITTER");
         Scanner scannerMenu = new Scanner(System.in);
 
+        //Verification que le scanner récupère un Int
+        boolean incorrectInput = true;
+        int choixMenu = 0;
+
+        while (incorrectInput) {
+            if (scannerMenu.hasNextInt()) {
+                choixMenu = scannerMenu.nextInt();
+                incorrectInput = false;
+            } else {
+                scannerMenu.next();
+            }
+        }
         //Gestion des choix du menu
-        int choixMenu = scannerMenu.nextInt();
         if (choixMenu == 1) {
             start();
         }
@@ -39,23 +51,36 @@ public class InterfaceUtilisateur {
         if (choixMenu == 3) {
             System.exit(0);
         } else {
-            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+            System.out.println("Entree invalide, veuillez selectionner une reponse valide");
             menu();
         }
+
 
     }
 
     //Affichage des options
     public void options() {
         System.out.println("-------OPTIONS-------");
-        System.out.println("Veuillez Sélectionner l'option souhaitée : ");
+        System.out.println("Veuillez Selectionner l'option souhaitee : ");
         System.out.println("1- Taille du Plateau");
-        System.out.println("2- Difficulté");
+        System.out.println("2- Difficulte");
         System.out.println("3- Couleur");
 
         //Gestion des choix des options
         Scanner scannerOption = new Scanner(System.in);
-        int choixOption = scannerOption.nextInt();
+        boolean incorrectInput = true;
+        int choixOption = 0;
+
+        //Verification que le scanner récupère un Int
+        while (incorrectInput) {
+            if (scannerOption.hasNextInt()) {
+                choixOption = scannerOption.nextInt();
+                incorrectInput = false;
+            } else {
+                scannerOption.next();
+            }
+        }
+
         if (choixOption == 1) {
             optionGrandeur();
         }
@@ -65,7 +90,7 @@ public class InterfaceUtilisateur {
         if (choixOption == 3) {
             optionCouleur();
         } else {
-            System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+            System.out.println("Entree invalide, veuillez selectionner une reponse valide");
             options();
         }
     }
@@ -73,20 +98,34 @@ public class InterfaceUtilisateur {
     //Affichage des Options de grandeur
     public void optionGrandeur() {
         System.out.println("-----OPTIONS GRANDEUR-------");
-        System.out.println("Veuillez séléctionner la taille du plateau souhaité");
+        System.out.println("Veuillez selectionner la taille du plateau souhaite");
         System.out.println("1-Grand");
         System.out.println("2-Moyen");
         System.out.println("3-Petit");
 
         //Gestion des choix des option de grandeur
         Scanner scannerGrandeur = new Scanner(System.in);
-        int choixGrandeur = scannerGrandeur.nextInt();
+
+
+        boolean incorrectInput = true;
+        int choixGrandeur = 0;
+
+        //Verification que le scanner récupère un Int
+        while (incorrectInput) {
+            if (scannerGrandeur.hasNextInt()) {
+                choixGrandeur = scannerGrandeur.nextInt();
+                incorrectInput = false;
+            } else {
+                scannerGrandeur.next();
+            }
+        }
+
 
         //création d'un nouveau plateau a l'aide du builder
         Builder plateauBuilder = new PlateauBuilder();
         Director director = new Director(plateauBuilder);
 
-        switch(choixGrandeur){
+        switch (choixGrandeur) {
             case 1:
                 plateau = director.makeGrandPlateau();
                 break;
@@ -97,11 +136,11 @@ public class InterfaceUtilisateur {
                 plateau = director.makePetitPlateau();
                 break;
             default:
-                System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+                System.out.println("Entree invalide, veuillez selectionner une reponse valide");
                 optionGrandeur();
                 break;
         }
-        System.err.println("Changement effectué !");
+        System.err.println("Changement effectue !");
         this.jeu = new Jeu(plateau, difficultes, couleur);
         this.menu();
 
@@ -109,17 +148,29 @@ public class InterfaceUtilisateur {
 
     //Affichage des Options de difficultés
     public void optionDifficultee() {
-        System.out.println("-----OPTIONS DIFFICULTÉ-------");
-        System.out.println("Veuillez séléctionner la difficulté souhaitée");
+        System.out.println("-----OPTIONS DIFFICULT\u00C9-------");
+        System.out.println("Veuillez selectionner la difficulte souhaitee");
         System.out.println("1- Facile");
         System.out.println("2- Normal");
         System.out.println("3- Difficile");
 
         //Gestion des choix des option de difficulté
         Scanner scannerDifficultes = new Scanner(System.in);
-        int choixDifficultes = scannerDifficultes.nextInt();
 
-        switch(choixDifficultes){
+        boolean incorrectInput = true;
+        int choixDifficultes = 0;
+
+        //Verification que le scanner récupère un Int
+        while (incorrectInput) {
+            if (scannerDifficultes.hasNextInt()) {
+                choixDifficultes = scannerDifficultes.nextInt();
+                incorrectInput = false;
+            } else {
+                scannerDifficultes.next();
+            }
+        }
+
+        switch (choixDifficultes) {
             case 1:
                 difficultes.facile();
                 break;
@@ -130,11 +181,11 @@ public class InterfaceUtilisateur {
                 difficultes.difficile();
                 break;
             default:
-                System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+                System.out.println("Entree invalide, veuillez selectionner une reponse valide");
                 optionDifficultee();
                 break;
         }
-        System.err.println("Changement effectué ! Le plateau contient désormais " + difficultes.nbBomb() + " bombes");
+        System.err.println("Changement effectue ! Le plateau contient desormais " + difficultes.nbBomb() + " bombes");
         this.jeu = new Jeu(plateau, difficultes, couleur);
         this.menu();
     }
@@ -142,8 +193,8 @@ public class InterfaceUtilisateur {
     //Affichage des options pour les couleurs
     public void optionCouleur() {
         System.out.println("-----OPTIONS COULEUR-------");
-        System.out.println("Veuillez séléctionner la couleur de case souhaitée");
-        System.out.println("(Cette option est purement esthétique, pour le plaisir de vos yeux)");
+        System.out.println("Veuillez selectionner la couleur de case souhaitee");
+        System.out.println("(Cette option est purement esthetique, pour le plaisir de vos yeux)");
         System.out.println("1-" + "\u001B[30m" + "Noir" + "\u001B[0m");
         System.out.println("2-" + "\u001B[31m" + "Rouge" + "\u001B[0m");
         System.out.println("3-" + "\u001B[32m" + "Vert" + "\u001B[0m");
@@ -155,9 +206,21 @@ public class InterfaceUtilisateur {
 
         //Gestion des choix des options de couleur
         Scanner scannerCouleur = new Scanner(System.in);
-        int choixCouleur = scannerCouleur.nextInt();
 
-        switch(choixCouleur){
+        boolean incorrectInput = true;
+        int choixCouleur = 0;
+
+        //Verification que le scanner récupère un Int
+        while (incorrectInput) {
+            if (scannerCouleur.hasNextInt()) {
+                choixCouleur = scannerCouleur.nextInt();
+                incorrectInput = false;
+            } else {
+                scannerCouleur.next();
+            }
+        }
+
+        switch (choixCouleur) {
             case 1:
                 couleur = "noir";
                 break;
@@ -183,11 +246,11 @@ public class InterfaceUtilisateur {
                 couleur = "blanc";
                 break;
             default:
-                System.out.println("Entrée invalide, veuillez séléctionner une réponse valide");
+                System.out.println("Entree invalide, veuillez selectionner une reponse valide");
                 optionCouleur();
                 break;
         }
-        System.err.println("Changement effectué !");
+        System.err.println("Changement effectue !");
         this.jeu = new Jeu(plateau, difficultes, couleur);
         this.menu();
     }
@@ -204,8 +267,8 @@ public class InterfaceUtilisateur {
             //on affiche le jeu
             jeu.afficherJeu();
             //on demande les coordonnées de la case souhaitée
-            System.out.println("Veuillez écrire les coordonnées de la case que vous souhaitez miner (ex : A1 ou C5)");
-            System.out.println("Si vous pensez qu'une bomne se trouve sur une case, ajouter un 'F' a la fin pour afficher un Drapeau (ex: A1F ou C5F)");
+            System.out.println("Veuillez ecrire les coordonnees de la case que vous souhaitez miner (ex : A1 ou C5)");
+            System.out.println("Si vous pensez qu'une bombe se trouve sur une case, ajouter un 'F' a la fin pour afficher un Drapeau (ex: A1F ou C5F)");
             try {
                 //gestion du choix de l'utilisateur
                 Scanner scannerJeu = new Scanner(System.in);
@@ -237,7 +300,7 @@ public class InterfaceUtilisateur {
                         //si la case courante est une bombe,
                         if (caseCourante.isBomb()) {
                             //C'est perdu, on arrete le jeu et on demande si l'utilisateur veut rejouer
-                            System.err.println("BOOM ! Dommage, vous avez perdu et explosé !");
+                            System.err.println("BOOM ! Dommage, vous avez perdu et explose !");
                             jeu.afficherJeuTerminer();
                             finJeu = true;
                             //sinon,
@@ -250,18 +313,18 @@ public class InterfaceUtilisateur {
                 //Si il n'y a plus de case libre restante,
                 if (casesLibresRestantes == 0) {
                     //c'est gagner, on arrete le jeu et on demande si l'utilisateur veut rejouer
-                    System.err.println("Félicitation ! vous avez déminé le terrain !");
+                    System.err.println("Felicitation ! vous avez demine le terrain !");
                     jeu.afficherJeuTerminer();
                     finJeu = true;
                 }
                 //si ya aucune correspondance avec ces cas las on emet une erreur pour que l'utilisateur puisse retenter d'ecrire la case voulu
             } catch (Exception e) {
-                System.err.println("Entrée invalide, veuillez utiliser le format souhaité");
+                System.err.println("Entree invalide, veuillez utiliser le format souhaite");
             }
 
         }
         //apres que le jeu soit fini, on remet le menu pour rejouer ou acceder aux options
-        System.out.println("Jeux terminé !");
+        System.out.println("Jeux termine !");
         menu();
     }
 

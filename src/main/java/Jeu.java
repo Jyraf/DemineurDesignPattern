@@ -184,19 +184,19 @@ public class Jeu {
         System.out.print("X");
         //pour chaque colone du plateau
         for (int i = 0; i < plateau.line; i++) {
-            //on ajoute le numéro
-            System.out.print("│" + (i + 1));
+            //on ajoute le numéro (\u007C = |  pour que ça s'affiche dans la console)
+            System.out.print("\u007C" + (i + 1));
         }
-        System.out.print("│");
+        System.out.print("\u007C");
         System.out.println();
         String[] lettres = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
         for (int y = 0; y < cases.length; y++) {
             //pour chaque premiere case de chaque ligne on met la lettre correspondant
-            System.out.print(lettres[y] + "│");
+            System.out.print(lettres[y] + "\u007C");
             //pour chaque case
             for (int x = 0; x < cases.length; x++) {
                 //on y affiche le status de la case
-                System.out.print(cases[y][x].afficherStatus() + "│");
+                System.out.print(cases[y][x].afficherStatus() + "\u007C");
             }
             System.out.println();
         }

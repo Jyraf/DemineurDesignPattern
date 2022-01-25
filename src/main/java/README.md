@@ -12,6 +12,13 @@ Pour réaliser les tests l'application, utilisez également gradle:
 ```shell
 gradle test
 ```
+
+##Lancer l'application
+Pour lancer l'application, utilisez encore une fois gradle:
+```shell
+gradle runApp
+```
+
 ##Designs Patterns
 Pour cette application, nous avions pour consigne d'utiliser au moins 3 design pattern.
 Nous avons donc décidé d'utiliser un builder, un decorator et deux state.

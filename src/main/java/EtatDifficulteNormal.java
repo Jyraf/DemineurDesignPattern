@@ -14,7 +14,7 @@ public class EtatDifficulteNormal implements EtatDifficulte {
 
     @Override
     public void normal() {
-        System.out.println("La difficultée est déjà en Normal");
+        System.out.println("La difficultee est deja en Normal");
     }
 
     @Override

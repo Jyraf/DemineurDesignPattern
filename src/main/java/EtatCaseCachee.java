@@ -20,7 +20,7 @@ public class EtatCaseCachee implements EtatCase {
     }
 
     public void fermerCases() {
-        System.out.println("La case est déja cachée");
+        System.out.println("La case est deja cachee");
     }
 
     public void flagCases() {

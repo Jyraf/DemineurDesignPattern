@@ -17,7 +17,7 @@ public class EtatDifficulteDifficile implements EtatDifficulte {
 
 
     public void difficile() {
-        System.out.println("Difficultée déja en difficile");
+        System.out.println("Difficultee deja en difficile");
     }
 
 

@@ -28,7 +28,7 @@ public class EtatCaseDrapeau implements EtatCase {
     }
 
     public void flagCases() {
-        System.out.println("La case est déjà un Drapeau");
+        System.out.println("La case est deja un Drapeau");
     }
 
     @Override

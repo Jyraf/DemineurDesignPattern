@@ -8,7 +8,7 @@ public class EtatDifficulteFacile implements EtatDifficulte {
 
     @Override
     public void facile() {
-        System.out.println("La difficultée est déjà en Facile");
+        System.out.println("La difficultee est deja en Facile");
     }
 
     @Override
